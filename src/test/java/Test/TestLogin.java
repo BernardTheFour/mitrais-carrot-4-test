@@ -18,6 +18,13 @@ public class TestLogin {
     static Farmer farmerPage;
     static Merchant merchant;
 
+    /** All login scenario
+     * 1. Input username
+     * 2. Input password
+     * 3. Assert homepage
+     * 4. Logout
+     */
+
     @BeforeClass
     public static void beforeLogin(){     
         Global.Init();
