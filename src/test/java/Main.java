@@ -2,7 +2,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
