@@ -5,9 +5,11 @@ import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestCreateNewBazaarItem {
@@ -37,19 +39,14 @@ public class TestCreateNewBazaarItem {
 
         // STEP-1
         loginPage.login("user_merchant", "1234");
+
         // STEP-2
         merchantPage.goToMerchTab();
     }
 
-//     Before each tests
-//    @Before
-//    public static void goToLoginPage() {
-//        // STEP-2
-//        loginPage.login("user_merchant", "1234");
-//    }
     @Test
     public void createItemSuccess() {
-        // STEP-3
+        // STEP-3,4,5
         BazaarItem item = new BazaarItem(
             "New Item",
             "Description of new item",
@@ -59,12 +56,22 @@ public class TestCreateNewBazaarItem {
             "07/05/2022"
         );
         merchantPage.createItem(item);
+
+        // STEP-6
+        BazaarItem newItem = merchantPage.getLastItem();
+
+        // STEP-7
+        Assert.assertEquals(item.getName(), newItem.getName());
+        Assert.assertEquals(item.getPrice(), newItem.getPrice());
+        Assert.assertEquals(item.getStock(), newItem.getStock());
     }
 
     // After all tests
     @AfterClass
     public static void clearAll() {
+        // STEP-8
         driver.manage().deleteAllCookies();
         driver.quit();
+
     }
 }
