@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import Pages.Global;
 import Pages.HomePage;
 import Pages.LoginPage;
 
@@ -16,7 +17,9 @@ public class TestLogin {
     static HomePage homePage;
 
     @BeforeClass
-    public static void beforeLogin(){        
+    public static void beforeLogin(){     
+        Global.Init();
+        
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
     }
