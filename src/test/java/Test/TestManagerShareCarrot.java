@@ -32,7 +32,7 @@ public class TestManagerShareCarrot {
         loginPage.login("user_manager_agus", "1234");
         managerShareCarrot.clickShareCarrotTab();
         managerShareCarrot.clickShareCarrotBtn();
-        managerShareCarrot.recipientDropDownList(1);
+        managerShareCarrot.recipientDropDownList(3);
         managerShareCarrot.setCarrotAmount("20");
         managerShareCarrot.setDescription("automated description");
         managerShareCarrot.clickSubmitButton();
@@ -42,7 +42,7 @@ public class TestManagerShareCarrot {
     public void assertShareCarrot(){
         loginPage.login("user_manager_agus", "1234");
         managerShareCarrot.clickShareCarrotTab();
-
+        managerShareCarrot.assertShareCarrotSuccess("Susi", "20", "automated description");
     }
 
     @After

@@ -1,5 +1,6 @@
 package Pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ManagerShareCarrot {
     WebDriver driver;
@@ -36,7 +38,6 @@ public class ManagerShareCarrot {
     By carrotAmount = By.xpath("//input[@name='CarrotAmount']");
     By description = By.xpath("//textarea[@name='Description']");
     By submitBtn = By.xpath("//button[normalize-space()='Submit']");
-    By table = By.xpath("//div[@role='table']");
 
     public ManagerShareCarrot(WebDriver driver){
         this.driver=driver;
@@ -81,9 +82,23 @@ public class ManagerShareCarrot {
         //submitBtn.click();
     }
 
-    public void shareCarrotSuccess(String rewardedTo, String qty, String desc){
+    public void assertShareCarrotSuccess(String rewardedTo, String qty, String desc){
         WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(table));
+        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTab));
+
+        WebElement table = driver.findElement(By.xpath("//div[@role='table']"));
+        //locate rows of table
+        List<WebElement> rows_table = table.findElements(By.className("rdt_TableRow"));
+        int last_row = rows_table.size()-1;
+        // get the column of the last row
+        List<WebElement> column_row = rows_table.get(last_row).findElements(By.className("sc-hKMtZM"));
+        // Assert rewarded to as expected
+        Assert.assertEquals(rewardedTo, column_row.get(0).getText());
+        // Assert quantity to as expected
+        Assert.assertEquals(qty,column_row.get(1).getText());
+        // Assert desc to as expected
+        Assert.assertEquals(desc, column_row.get(2).getText());
+
 
     }
 }
