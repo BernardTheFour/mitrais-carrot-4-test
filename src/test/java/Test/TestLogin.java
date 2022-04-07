@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import Pages.Farmer;
 import Pages.Global;
-import Pages.HomePage;
 import Pages.LoginPage;
 
 public class TestLogin {
     static WebDriver driver;
     static LoginPage loginPage;
-    static HomePage homePage;
+    static Farmer farmerPage;
 
     @BeforeClass
     public static void beforeLogin(){     
@@ -22,11 +22,13 @@ public class TestLogin {
         
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
+        farmerPage = new Farmer(driver);
     }
 
     @Test
-    public void userFarmer(){
+    public void farmerLogin(){
         loginPage.login("user_farmer", "1234");
+        farmerPage.assertHomePage("Farmer", "SE-AP", "Training and Development", "Farmer");
     }
 
     @Test

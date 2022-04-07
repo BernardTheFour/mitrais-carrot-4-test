@@ -1,13 +1,11 @@
 package Pages;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -44,11 +42,10 @@ public class LoginPage {
     }
 
     public void assertErrorMessage(){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(failLoginPath));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+        .until(ExpectedConditions.visibilityOfElementLocated(failLoginPath));
+        
         failLoginElement = driver.findElement(failLoginPath); 
-
         Assert.assertEquals(failLoginElement.getText(), "Incorrect username or password!");
     }
 }
