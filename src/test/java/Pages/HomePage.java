@@ -14,8 +14,8 @@ public class HomePage {
 
     // Locators for navbar (every page have navbar)
     By userDescPath = By.xpath("//div[@class='dropdown-menu show dropdown-menu-end']//div//div[1]");
-
     By profileDropdownPath = By.xpath("//a[@id='basic-nav-dropdown']");
+    By logoutPath = By.xpath("//a[normalize-space()='Logout']");
 
     By fullnamePath(String fullname) {
         return By.xpath("//h3[normalize-space()='" + fullname + "']");
@@ -24,8 +24,8 @@ public class HomePage {
     // Elements
     protected WebElement fullnameElement,
             userDescElement,
-            profileDropdownElement;
-            //logoutElement;
+            profileDropdownElement,
+            logoutElement;
 
     // method
     protected void setDriver(WebDriver driver) {
@@ -40,6 +40,11 @@ public class HomePage {
                 .until(ExpectedConditions.visibilityOfElementLocated(fullnamePath(fullname)));
         fullnameElement = driver.findElement(fullnamePath(fullname));
         userDescElement = driver.findElement(userDescPath);
+        logoutElement = driver.findElement(logoutPath);
+    }
+
+    public void logout(){
+        logoutElement.click();
     }
 
     public void assertUser(
@@ -56,5 +61,23 @@ public class HomePage {
 
         Assert.assertEquals(expectedFullname, fullnameElement.getText());
         Assert.assertEquals(userDesc, userDescElement.getText().replace("\n", "")); // delete newline
+    }
+
+    public void assertHomePage(
+            String expectedFullname,
+            String expectedGrade,
+            String expectedPosition,
+            String expectedRole) {
+
+        // wait until page finish loading
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlContains(expectedRole.toLowerCase()));     
+
+        assignPageElement(expectedFullname);
+        
+        String expectedURL = Global.WebURL + "home/" + expectedRole.toLowerCase();
+        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
+
+        assertUser(expectedFullname, expectedGrade, expectedPosition, expectedRole);
     }
 }

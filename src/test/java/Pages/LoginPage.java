@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,6 +24,9 @@ public class LoginPage {
 
     public void login(String username, String password){  
         driver.get(Global.WebURL);    
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlContains(Global.LoginURL));  
 
         driver.findElement(usernamePath).sendKeys(username);
         driver.findElement(passwordPath).sendKeys(password);
