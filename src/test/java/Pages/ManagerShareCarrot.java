@@ -36,6 +36,7 @@ public class ManagerShareCarrot {
     By carrotAmount = By.xpath("//input[@name='CarrotAmount']");
     By description = By.xpath("//textarea[@name='Description']");
     By submitBtn = By.xpath("//button[normalize-space()='Submit']");
+    By table = By.xpath("//div[@role='table']");
 
     public ManagerShareCarrot(WebDriver driver){
         this.driver=driver;
@@ -78,5 +79,11 @@ public class ManagerShareCarrot {
     public void clickSubmitButton(){
         driver.findElement(submitBtn).click();
         //submitBtn.click();
+    }
+
+    public void shareCarrotSuccess(String rewardedTo, String qty, String desc){
+        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
+        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(table));
+
     }
 }

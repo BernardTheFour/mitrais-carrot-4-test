@@ -36,6 +36,12 @@ public class TestManagerShareCarrot {
         managerShareCarrot.setCarrotAmount("20");
         managerShareCarrot.setDescription("automated description");
         managerShareCarrot.clickSubmitButton();
+    }
+
+    @Test
+    public void assertShareCarrot(){
+        loginPage.login("user_manager_agus", "1234");
+        managerShareCarrot.clickShareCarrotTab();
 
     }
 
