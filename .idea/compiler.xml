@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mitrais-carrot-4-test" />
         <module name="MitraisCarrotTest" />
       </profile>
     </annotationProcessing>
