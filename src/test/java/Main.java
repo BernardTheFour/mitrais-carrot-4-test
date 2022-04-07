@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -9,14 +10,16 @@ import org.junit.runner.notification.Failure;
 import Pages.Global;
 import Test.TestLogin;
 
+
 public class Main {
     private static Result result;
 
     public static void main(String[] args) {
         System.out.println("\n....TEST STARTED...");
-        
-        System.setProperty(Global.chromeDriverName, Global.chromeDriverPath);
+
+        Global.Init();
         runTest();
+        
         reportTestResult();
 
         System.out.println("\n....TEST COMPLETED...");
@@ -29,6 +32,7 @@ public class Main {
             TestLogin.class
         );
     }
+
 
     static void reportTestResult() {
         try {
@@ -44,9 +48,9 @@ public class Main {
             int index = 1;
 
             for (Failure failure : result.getFailures()) {
-                String message = "FAIL ("+(index++)+ "): ";
+                String message = "-> FAIL no."+(index++)+ ": ";
                 message += "\n" + failure.toString();
-                message += "\n\n" + "TRACE: \n" + failure.getTrace();
+                message += "\n\n-> " + "TRACE: \n" + failure.getTrace();
 
                 fileWriter.write(message);
             }
