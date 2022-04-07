@@ -29,11 +29,6 @@ public class Merchant extends HomePage {
     By lastTblItemPricePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
     By lastTblItemStockPath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='3']/div");
 
-    // Merchandise Table Locators
-    By lastTblItemNamePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='1']/div");
-    By lastTblItemPricePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
-    By lastTblItemStockPath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='3']/div");
-
     public Merchant(WebDriver driver) {
         super.driver = driver;
     }
@@ -67,7 +62,7 @@ public class Merchant extends HomePage {
         newItem.setName(driver.findElement(lastTblItemNamePath).getText());
         newItem.setPrice(driver.findElement(lastTblItemPricePath).getText());
         newItem.setStock(driver.findElement(lastTblItemStockPath).getText());
-
+        System.out.println(newItem);
         return newItem;
     }
 }
