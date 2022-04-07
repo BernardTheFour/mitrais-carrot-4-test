@@ -12,7 +12,7 @@ import Dto.BarnItem;
 public class Farmer extends HomePage {
 
     // Locator for create barn
-    By barnTabPath = By.xpath("//button[@id='react-aria9740901346-40-tab-barn']");
+    By barnTabPath = By.xpath("//h3[normalize-space()='Barn']");
     By addBarnPath = By.xpath("//button[normalize-space()='Add Barn']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
 

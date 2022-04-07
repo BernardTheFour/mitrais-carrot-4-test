@@ -4,12 +4,12 @@ import Dto.BazaarItem;
 import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestCreateNewBazaarItem {
@@ -29,7 +29,7 @@ public class TestCreateNewBazaarItem {
     * */
 
     // Before all tests
-    @BeforeClass
+    @BeforeAll
     public static void beforeLogin() {
         Global.Init();
 
@@ -61,13 +61,13 @@ public class TestCreateNewBazaarItem {
         BazaarItem newItem = merchantPage.getLastItem();
 
         // STEP-7
-        Assert.assertEquals(item.getName(), newItem.getName());
-        Assert.assertEquals(item.getPrice(), newItem.getPrice());
-        Assert.assertEquals(item.getStock(), newItem.getStock());
+        Assertions.assertEquals(item.getName(), newItem.getName());
+        Assertions.assertEquals(item.getPrice(), newItem.getPrice());
+        Assertions.assertEquals(item.getStock(), newItem.getStock());
     }
 
     // After all tests
-    @AfterClass
+    @AfterAll
     public static void clearAll() {
         // STEP-8
         driver.manage().deleteAllCookies();
