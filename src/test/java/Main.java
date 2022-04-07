@@ -9,6 +9,7 @@ import org.junit.runner.notification.Failure;
 
 import Pages.Global;
 import Test.TestLogin;
+import Test.TestManagerShareCarrot;
 
 
 public class Main {
@@ -30,6 +31,7 @@ public class Main {
         result = jUnitCore.run(
         // test classes
             TestLogin.class
+            //TestManagerShareCarrot.class
         );
     }
 
