@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -9,14 +10,17 @@ import org.junit.runner.notification.Failure;
 import Pages.Global;
 import Test.TestLogin;
 
+
 public class Main {
     private static Result result;
 
+    @Test
     public static void main(String[] args) {
         System.out.println("\n....TEST STARTED...");
-        
+
         System.setProperty(Global.chromeDriverName, Global.chromeDriverPath);
         runTest();
+        printTestResutl();
         reportTestResult();
 
         System.out.println("\n....TEST COMPLETED...");
@@ -28,6 +32,25 @@ public class Main {
         // test classes
             TestLogin.class
         );
+    }
+
+    static void printTestResutl(){
+        if (result.wasSuccessful()){
+            System.out.println("--> TESTING PASSED <--");
+            return;
+        }
+
+        System.out.println("--> TESTING FAILED: " + result.getFailureCount() + " test(s) <--\n\n");
+
+        int index = 1;
+
+        for (Failure failure : result.getFailures()) {
+            String message = "FAIL ("+(index++)+ "): ";
+            message += "\n" + failure.toString();
+            message += "\n\n" + "TRACE: \n" + failure.getTrace();
+
+            System.err.println(message);
+        }
     }
 
     static void reportTestResult() {
@@ -44,9 +67,9 @@ public class Main {
             int index = 1;
 
             for (Failure failure : result.getFailures()) {
-                String message = "FAIL ("+(index++)+ "): ";
+                String message = "-> FAIL no."+(index++)+ ": ";
                 message += "\n" + failure.toString();
-                message += "\n\n" + "TRACE: \n" + failure.getTrace();
+                message += "\n\n-> " + "TRACE: \n" + failure.getTrace();
 
                 fileWriter.write(message);
             }
