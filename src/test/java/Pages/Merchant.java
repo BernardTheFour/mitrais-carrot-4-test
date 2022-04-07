@@ -13,6 +13,8 @@ public class Merchant extends HomePage {
     // Locator for create bazaar item
     By merchTabPath = By.xpath("//h3[normalize-space()='Merchandise']");
     By createBtnPath = By.xpath("//button[normalize-space()='Add Item']");
+    By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");    
+    
     By itemNamePath = By.xpath("//input[@name='ItemName']");
     By itemDescPath = By.xpath("//input[@name='ItemDescription']");
     By itemImgPath = By.xpath("//input[@name='ItemImg']");
@@ -21,7 +23,6 @@ public class Merchant extends HomePage {
     By itemBazaarPath = By.xpath("//input[@name='BazaarId']");
     By itemStartDatePath = By.xpath("//input[@name='ItemStartDate']");
     By itemEndDatePath = By.xpath("//input[@name='ItemEndDate']");
-    By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
 
     public Merchant(WebDriver driver) {
         super.driver = driver;
@@ -39,8 +40,8 @@ public class Merchant extends HomePage {
     }
 
     public void goToMerchTab() {
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(merchTabPath));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(merchTabPath));
 
         super.driver.findElement(merchTabPath).click();
     }
