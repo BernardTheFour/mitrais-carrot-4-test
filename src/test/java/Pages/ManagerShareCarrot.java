@@ -1,10 +1,9 @@
 package Pages;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 // this import for drop-down select selenium
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -93,11 +92,11 @@ public class ManagerShareCarrot {
         // get the column of the last row
         List<WebElement> column_row = rows_table.get(last_row).findElements(By.className("sc-hKMtZM"));
         // Assert rewarded to as expected
-        Assert.assertEquals(rewardedTo, column_row.get(0).getText());
+        Assertions.assertEquals(rewardedTo, column_row.get(0).getText());
         // Assert quantity to as expected
-        Assert.assertEquals(qty,column_row.get(1).getText());
+        Assertions.assertEquals(qty,column_row.get(1).getText());
         // Assert desc to as expected
-        Assert.assertEquals(desc, column_row.get(2).getText());
+        Assertions.assertEquals(desc, column_row.get(2).getText());
 
 
     }
