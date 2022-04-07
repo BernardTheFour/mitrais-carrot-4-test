@@ -1,9 +1,9 @@
 package Test;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -27,7 +27,7 @@ public class TestLogin {
      * 4. Logout
      */
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeLogin(){     
         Global.Init();
         
@@ -95,14 +95,14 @@ public class TestLogin {
         loginPage.assertErrorMessage();
     }
 
-    @After
+    @AfterEach
     public void clearCache(){
         //Delete cookies to logout user
         driver.manage().deleteAllCookies();
     }
 
     //After all tests
-    @AfterClass
+    @AfterAll
     public static void closeBrowser(){        
         //Terminate the WebDriver
         driver.quit();

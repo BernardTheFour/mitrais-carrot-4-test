@@ -1,8 +1,11 @@
 package Test;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -11,6 +14,7 @@ import Pages.Farmer;
 import Pages.Global;
 import Pages.LoginPage;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreateNewBarn {
     /**
      * Test Scenario
@@ -28,7 +32,7 @@ public class TestCreateNewBarn {
     private static LoginPage loginPage;
     private static Farmer farmerPage;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeLogin() {
         Global.Init();
 
@@ -43,6 +47,7 @@ public class TestCreateNewBarn {
     }
 
     @Test
+    @Order(1)
     public static void createBarnSuccess() {
         // step-3 to step-5
         BarnItem barn = new BarnItem(
@@ -54,7 +59,7 @@ public class TestCreateNewBarn {
         farmerPage.createBarn(barn);
     }
 
-    @AfterClass
+    @AfterAll
     public static void clearAll(){
         driver.manage().deleteAllCookies();
         driver.quit();

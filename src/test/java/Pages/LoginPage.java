@@ -2,7 +2,7 @@ package Pages;
 
 import java.time.Duration;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,6 +38,6 @@ public class LoginPage {
         .until(ExpectedConditions.visibilityOfElementLocated(failLoginPath));
         
         WebElement failLoginElement = driver.findElement(failLoginPath); 
-        Assert.assertEquals(failLoginElement.getText(), "Incorrect username or password!");
+        Assertions.assertEquals(failLoginElement.getText(), "Incorrect username or password!");
     }
 }

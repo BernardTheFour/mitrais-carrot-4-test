@@ -2,7 +2,7 @@ package Pages;
 
 import java.time.Duration;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,8 +59,8 @@ public class HomePage {
                 + expectedPosition
                 + expectedRole;
 
-        Assert.assertEquals(expectedFullname, fullnameElement.getText());
-        Assert.assertEquals(userDesc, userDescElement.getText().replace("\n", "")); // delete newline
+        Assertions.assertEquals(expectedFullname, fullnameElement.getText());
+        Assertions.assertEquals(userDesc, userDescElement.getText().replace("\n", "")); // delete newline
     }
 
     public void assertHomePage(
@@ -76,7 +76,7 @@ public class HomePage {
         assignPageElement(expectedFullname);
         
         String expectedURL = Global.WebURL + "home/" + expectedRole.toLowerCase();
-        Assert.assertEquals(expectedURL, driver.getCurrentUrl());
+        Assertions.assertEquals(expectedURL, driver.getCurrentUrl());
 
         assertUser(expectedFullname, expectedGrade, expectedPosition, expectedRole);
     }
