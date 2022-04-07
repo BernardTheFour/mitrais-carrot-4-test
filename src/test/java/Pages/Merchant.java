@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class Merchant extends HomePage {
 
-    // Locator for create bazaar item
+    // Locators
     By merchTabPath = By.xpath("//h3[normalize-space()='Merchandise']");
     By createBtnPath = By.xpath("//button[normalize-space()='Add Item']");
     By itemNamePath = By.xpath("//input[@name='ItemName']");
@@ -22,6 +22,11 @@ public class Merchant extends HomePage {
     By itemStartDatePath = By.xpath("//input[@name='ItemStartDate']");
     By itemEndDatePath = By.xpath("//input[@name='ItemEndDate']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
+
+    // Merchandise Table Locators
+    By lastTblItemNamePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='1']/div");
+    By lastTblItemPricePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
+    By lastTblItemStockPath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='3']/div");
 
     public Merchant(WebDriver driver) {
         super.driver = driver;
@@ -49,5 +54,14 @@ public class Merchant extends HomePage {
         super.driver.findElement(createBtnPath).click();
         fillCreateForm(item);
         super.driver.findElement(submitBtnPath).click();
+    }
+
+    public BazaarItem getLastItem() {
+        BazaarItem newItem = new BazaarItem();
+        newItem.setName(driver.findElement(lastTblItemNamePath).getText());
+        newItem.setPrice(driver.findElement(lastTblItemPricePath).getText());
+        newItem.setStock(driver.findElement(lastTblItemStockPath).getText());
+
+        return newItem;
     }
 }
