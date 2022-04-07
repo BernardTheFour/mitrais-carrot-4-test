@@ -10,11 +10,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import Pages.Farmer;
 import Pages.Global;
 import Pages.LoginPage;
+import Pages.Merchant;
 
 public class TestLogin {
     static WebDriver driver;
     static LoginPage loginPage;
     static Farmer farmerPage;
+    static Merchant merchant;
 
     @BeforeClass
     public static void beforeLogin(){     
@@ -23,12 +25,21 @@ public class TestLogin {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         farmerPage = new Farmer(driver);
+        merchant = new Merchant(driver);
     }
 
     @Test
     public void farmerLogin(){
         loginPage.login("user_farmer", "1234");
         farmerPage.assertHomePage("Farmer", "SE-AP", "Training and Development", "Farmer");
+        farmerPage.logout();
+    }
+
+    @Test
+    public void merchantLogin(){
+        loginPage.login("user_merchant", "1234");
+        merchant.assertHomePage("Merchant", "SE-AP", "Training and Development", "Merchant");
+        merchant.logout();
     }
 
     @Test

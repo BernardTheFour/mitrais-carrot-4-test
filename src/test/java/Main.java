@@ -29,8 +29,8 @@ public class Main {
         JUnitCore jUnitCore = new JUnitCore();
         result = jUnitCore.run(
         // test classes
-            TestCreateNewBazaarItem.class,
-            TestLogin.class
+            TestLogin.class,
+            TestCreateNewBazaarItem.class
         );
     }
 

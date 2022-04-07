@@ -2,8 +2,8 @@ package Pages;
 
 public class Global {
     // page url
-    public static String WebURL = "http://localhost:3000";
-    public static String FarmerHomeURL = "/home/farmer";
+    public static String WebURL = "http://localhost:3000/";
+    public static String LoginURL = "login";
 
     // browser driver
     public static String chromeDriverName ="webdriver.chrome.driver";
