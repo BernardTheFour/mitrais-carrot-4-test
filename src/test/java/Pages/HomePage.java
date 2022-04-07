@@ -14,6 +14,7 @@ public class HomePage {
 
     // Locators for navbar (every page have navbar)
     By userDescPath = By.xpath("//div[@class='dropdown-menu show dropdown-menu-end']//div//div[1]");
+
     By profileDropdownPath = By.xpath("//a[@id='basic-nav-dropdown']");
 
     By fullnamePath(String fullname) {
@@ -21,13 +22,17 @@ public class HomePage {
     }
 
     // Elements
-    protected WebElement fullnameElement, userDescElement, profileDropdownElement;
+    protected WebElement fullnameElement,
+            userDescElement,
+            profileDropdownElement;
+            //logoutElement;
 
+    // method
     protected void setDriver(WebDriver driver) {
         this.driver = driver;
     }
 
-    protected void assignPageElement(String fullname) {        
+    protected void assignPageElement(String fullname) {
         profileDropdownElement = driver.findElement(profileDropdownPath);
         profileDropdownElement.click();
 
@@ -44,7 +49,7 @@ public class HomePage {
             String expectedRole) {
 
         // ex: "StaffJunior Programmer, Training and DevelopmentStaff"
-        String userDesc = expectedFullname 
+        String userDesc = expectedFullname
                 + expectedGrade + ", "
                 + expectedPosition
                 + expectedRole;
