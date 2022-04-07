@@ -21,11 +21,13 @@ public class Farmer extends HomePage {
 
         // wait until page finish loading
         new WebDriverWait(super.driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlContains(Global.FarmerHomePage));     
+
+                .until(ExpectedConditions.urlContains(Global.FarmerHomeURL));     
 
         super.assignPageElement(expectedFullname);
         
-        String expectedURL = Global.WebURL + Global.FarmerHomePage;
+        String expectedURL = Global.WebURL + Global.FarmerHomeURL;
+
         Assert.assertEquals(expectedURL, super.driver.getCurrentUrl());
 
         super.assertUser(expectedFullname, expectedGrade, expectedPosition, expectedRole);

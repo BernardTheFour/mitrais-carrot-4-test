@@ -3,7 +3,7 @@ package Test;
 import Dto.BazaarItem;
 import Pages.Global;
 import Pages.LoginPage;
-import Pages.MerchantHomePage;
+import Pages.Merchant;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestCreateNewBazaarItem {
     private static WebDriver driver;
     private static LoginPage loginPage;
-    private static MerchantHomePage merchantPage;
+    private static Merchant merchantPage;
 
     /* Test Scenario
     * 1. Login into Mitrais Carrot as Merchant
@@ -33,7 +33,7 @@ public class TestCreateNewBazaarItem {
 
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        merchantPage = new MerchantHomePage(driver);
+        merchantPage = new Merchant(driver);
 
         // STEP-1
         loginPage.login("user_merchant", "1234");

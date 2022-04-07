@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,34 +19,23 @@ public class LoginPage {
     By loginBtnPath = By.xpath("//button[normalize-space()='Sign in']");
     By failLoginPath = By.xpath("//div[@role='alert']");
 
-    // Elements
-    WebElement usernameElement, passwordElement, loginBtnElement, failLoginElement;
-
     public LoginPage(WebDriver driver){
         this.driver = driver;
     }
 
-    private void assignElement(){
-        usernameElement = driver.findElement(usernamePath);
-        passwordElement = driver.findElement(passwordPath);
-        loginBtnElement = driver.findElement(loginBtnPath);      
-        //failLoginElement = this.driver.findElement(failLoginPath);  
-    }
-
     public void login(String username, String password){  
-        driver.get(Global.WebURL);        
-        assignElement(); 
+        driver.get(Global.WebURL);    
 
-        usernameElement.sendKeys(username);
-        passwordElement.sendKeys(password);
-        loginBtnElement.click();
+        driver.findElement(usernamePath).sendKeys(username);
+        driver.findElement(passwordPath).sendKeys(password);
+        driver.findElement(loginBtnPath).click();
     }
 
     public void assertErrorMessage(){
         new WebDriverWait(driver, Duration.ofSeconds(10))
         .until(ExpectedConditions.visibilityOfElementLocated(failLoginPath));
         
-        failLoginElement = driver.findElement(failLoginPath); 
+        WebElement failLoginElement = driver.findElement(failLoginPath); 
         Assert.assertEquals(failLoginElement.getText(), "Incorrect username or password!");
     }
 }
