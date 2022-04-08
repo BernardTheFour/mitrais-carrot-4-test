@@ -13,22 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class ManagerShareCarrot {
+public class Manager extends HomePage {
     WebDriver driver;
-
-//    @FindBy(xpath = "(//h3[normalize-space()='Share Carrot']")
-//    WebElement shareCarrotTab;
-//    @FindBy(xpath = "(//button[contains(text(),'Share Carrot')])[1]")
-//    WebElement shareCarrotBtn;
-//    // Recipient drop-down
-//    @FindBy(xpath = "//select[@class='form-select']")
-//    WebElement recipient;
-//    @FindBy(xpath = "//input[@name='CarrotAmount']")
-//    WebElement carrotAmount;
-//    @FindBy(xpath = "//textarea[@name='Description']")
-//    WebElement description;
-//    @FindBy(xpath = "//button[normalize-space()='Submit']")
-//    WebElement submitBtn;
 
     // Locators
     By shareCarrotTab = By.xpath("//h3[normalize-space()='Share Carrot']");
@@ -38,7 +24,7 @@ public class ManagerShareCarrot {
     By description = By.xpath("//textarea[@name='Description']");
     By submitBtn = By.xpath("//button[normalize-space()='Submit']");
 
-    public ManagerShareCarrot(WebDriver driver){
+    public Manager(WebDriver driver){
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }
