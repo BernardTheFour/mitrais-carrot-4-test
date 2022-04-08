@@ -31,7 +31,9 @@ public class TestManagerCannotShareCarrot {
         manager.shareCarrotTab().recipientDropDownList("Staff");
         manager.shareCarrotTab().setCarrotAmount("-123"); // negative value sent
         manager.shareCarrotTab().setDescription("negative value frozen carrot sent automated");
-        manager.shareCarrotTab().clickSubmitButton();
+        Assertions.assertEquals(false, manager.shareCarrotTab().isButtonEnabled());
+        manager.shareCarrotTab().closeModalShare();
+
     }
 
     @Test
@@ -69,6 +71,4 @@ public class TestManagerCannotShareCarrot {
         //Terminate the WebDriver
         driver.quit();
     }
-
-
 }

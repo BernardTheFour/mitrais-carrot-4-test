@@ -1,6 +1,5 @@
 package Pages;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,18 +30,37 @@ public class HomePage {
         this.driver = driver;
     }
 
-    protected void assignPageElement(String fullname) {
-        profileDropdownElement = driver.findElement(profileDropdownPath);
-        profileDropdownElement.click();
+    protected void assignPageElement() {
+        if (profileDropdownElement != null) {
+            return;
+        }
 
         new WebDriverWait(driver, Global.Timeout)
-                .until(ExpectedConditions.visibilityOfElementLocated(fullnamePath(fullname)));
-        fullnameElement = driver.findElement(fullnamePath(fullname));
+                .until(ExpectedConditions.urlContains("home"));
+
+        profileDropdownElement = driver.findElement(profileDropdownPath);
+        profileDropdownElement.click();
+        
         userDescElement = driver.findElement(userDescPath);
         logoutElement = driver.findElement(logoutPath);
+        profileDropdownElement.click();
     }
 
-    public void logout(){
+    protected void assignProfileElement(String fullname) {
+        if (!logoutElement.isDisplayed()) {
+            profileDropdownElement.click();
+        }
+
+        fullnameElement = driver.findElement(fullnamePath(fullname));
+    }
+
+    public void logout() {
+        assignPageElement();
+
+        if (!logoutElement.isDisplayed()) {
+            profileDropdownElement.click();
+        }
+
         logoutElement.click();
     }
 
@@ -70,10 +88,11 @@ public class HomePage {
 
         // wait until page finish loading
         new WebDriverWait(driver, Global.Timeout)
-                .until(ExpectedConditions.urlContains(expectedRole.toLowerCase()));     
+                .until(ExpectedConditions.urlContains(expectedRole.toLowerCase()));
 
-        assignPageElement(expectedFullname);
-        
+        assignPageElement();
+        assignProfileElement(expectedFullname);
+
         String expectedURL = Global.WebURL + "home/" + expectedRole.toLowerCase();
         Assertions.assertEquals(expectedURL, driver.getCurrentUrl());
 
