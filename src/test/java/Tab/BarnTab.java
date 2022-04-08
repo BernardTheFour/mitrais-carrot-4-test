@@ -1,7 +1,10 @@
 package Tab;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +20,7 @@ public class BarnTab implements IHompageTab {
     By barnTabPath = By.xpath("//h3[normalize-space()='Barn']");
     By addBarnPath = By.xpath("//button[normalize-space()='Add Barn']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
+    By closeButtonPath = By.xpath("//button[normalize-space()='Close']");
 
     // Create new barn locators
     By itemNamePath = By.xpath("//input[@name='BarnName']");
@@ -46,6 +50,24 @@ public class BarnTab implements IHompageTab {
                 .until(ExpectedConditions.visibilityOfElementLocated(barnTabPath));
 
         driver.findElement(barnTabPath).click();
+    }
+
+    public void closeBarnPopUp() {
+        driver.findElement(closeButtonPath).click();
+    }
+
+    public boolean canSubmit(BarnItem item) {
+        driver.findElement(addBarnPath).click();
+        fillCreateForm(item);
+
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(2))
+                    .until(ExpectedConditions.elementToBeClickable(submitBtnPath));
+            return true;
+        } catch (TimeoutException e) {
+            System.out.println("ERROR: " + e.getStackTrace());
+            return false;
+        }
     }
 
     public void createBarn(BarnItem item) {
