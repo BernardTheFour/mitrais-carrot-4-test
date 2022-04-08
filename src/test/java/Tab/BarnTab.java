@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Dto.BarnItem;
 
-public class BarnTab {
+public class BarnTab implements IHompageTab {
     WebDriver driver;
 
     // Locator for create barn
@@ -26,7 +26,8 @@ public class BarnTab {
     public BarnTab(WebDriver driver) {
         this.driver = driver;
     }
-
+    
+    @Override
     public void focus() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(barnTabPath));
