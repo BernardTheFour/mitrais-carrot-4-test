@@ -1,14 +1,14 @@
 package Tab;
 
 import Dto.BazaarItem;
+import Pages.Global;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class MerchandiseTab implements IHompageTab {
     WebDriver driver;
@@ -40,7 +40,7 @@ public class MerchandiseTab implements IHompageTab {
 
     @Override
     public void focus() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(merchTabPath));
 
         driver.findElement(merchTabPath).click();
@@ -62,7 +62,7 @@ public class MerchandiseTab implements IHompageTab {
             merchTblLastPageBtnElement.click();
         }
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemNamePath));
         newItem.setName(driver.findElement(lastTblItemNamePath).getText());
         newItem.setPrice(driver.findElement(lastTblItemPricePath).getText());

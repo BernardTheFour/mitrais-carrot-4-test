@@ -1,6 +1,5 @@
 package Pages;
 
-import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
@@ -25,7 +24,7 @@ public class LoginPage {
     public void login(String username, String password){  
         driver.get(Global.WebURL);    
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.urlContains(Global.LoginURL));  
 
         driver.findElement(usernamePath).sendKeys(username);
@@ -34,7 +33,7 @@ public class LoginPage {
     }
 
     public void assertErrorMessage(){
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
         .until(ExpectedConditions.visibilityOfElementLocated(failLoginPath));
         
         WebElement failLoginElement = driver.findElement(failLoginPath); 
