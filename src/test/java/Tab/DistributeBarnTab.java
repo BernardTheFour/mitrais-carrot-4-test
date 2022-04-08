@@ -1,11 +1,11 @@
 package Tab;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Pages.Global;
 
 public class DistributeBarnTab implements IHompageTab {
     WebDriver driver;
@@ -20,7 +20,7 @@ public class DistributeBarnTab implements IHompageTab {
     @Override
     public void focus() {
         // TODO Auto-generated method stub
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(distributeTabPath));
 
         driver.findElement(distributeTabPath).click();

@@ -1,7 +1,5 @@
 package Tab;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +42,7 @@ public class BarnTab implements IHompageTab {
 
     @Override
     public void focus() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(barnTabPath));
 
         driver.findElement(barnTabPath).click();
@@ -76,7 +74,7 @@ public class BarnTab implements IHompageTab {
             js.executeScript("arguments[0].scrollIntoView(true);", farmerTblLastRowElement);
         }
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(lastTblBarnNamePath));
 
         barnItem.setName(driver.findElement(lastTblBarnNamePath).getText());

@@ -1,6 +1,5 @@
 package Pages;
 
-import java.time.Duration;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
@@ -36,7 +35,7 @@ public class HomePage {
         profileDropdownElement = driver.findElement(profileDropdownPath);
         profileDropdownElement.click();
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(fullnamePath(fullname)));
         fullnameElement = driver.findElement(fullnamePath(fullname));
         userDescElement = driver.findElement(userDescPath);
@@ -70,7 +69,7 @@ public class HomePage {
             String expectedRole) {
 
         // wait until page finish loading
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.urlContains(expectedRole.toLowerCase()));     
 
         assignPageElement(expectedFullname);

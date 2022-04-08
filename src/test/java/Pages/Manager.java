@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 import java.util.List;
 
 public class Manager extends HomePage {
@@ -29,7 +28,7 @@ public class Manager extends HomePage {
 
     // click on Share Carrot tab
     public void clickShareCarrotTab(){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitWeb = new WebDriverWait(driver, Global.Timeout);
         waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
         driver.findElement(shareCarrotTabPath).click();
     }
@@ -65,7 +64,7 @@ public class Manager extends HomePage {
     }
 
     public void assertShareCarrotSuccess(String rewardedTo, String qty, String desc){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitWeb = new WebDriverWait(driver, Global.Timeout);
         waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
 
         // check if last page button can be clicked
@@ -91,7 +90,7 @@ public class Manager extends HomePage {
     }
 
     public void assertShareValue(String qty){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitWeb = new WebDriverWait(driver, Global.Timeout);
         waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
 
         // check if last page button can be clicked
@@ -113,7 +112,7 @@ public class Manager extends HomePage {
     }
 
     public void assertShareNoReceiver(String rewardedTo){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitWeb = new WebDriverWait(driver, Global.Timeout);
         waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
 
         // check if last page button can be clicked
