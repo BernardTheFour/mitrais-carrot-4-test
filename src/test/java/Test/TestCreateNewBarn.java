@@ -3,6 +3,7 @@ package Test;
 
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -52,13 +53,21 @@ public class TestCreateNewBarn {
         farmerPage.barnTab().focus();
         
         // step-3 to step-5
-        BarnItem barn = new BarnItem(
+        BarnItem item = new BarnItem(
                 "Barn 2023",
                 "150000",
                 "250",
                 "01/01/2023",
                 "31/12/2023");
-        farmerPage.barnTab().createBarn(barn);
+        farmerPage.barnTab().createBarn(item);
+
+        // step-6
+        BarnItem newItem = farmerPage.barnTab().getLastItem();
+
+        // step-7
+        Assertions.assertEquals(item.getName(), newItem.getName());
+        Assertions.assertEquals(item.getInitialCarrot(), newItem.getInitialCarrot());
+        Assertions.assertEquals(item.getEndDate(), newItem.getEndDate());
     }
 
     @AfterAll
