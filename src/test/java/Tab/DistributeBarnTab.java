@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DistributeBarnTab {
+public class DistributeBarnTab implements IHompageTab {
     WebDriver driver;
 
     // Locators
@@ -17,7 +17,9 @@ public class DistributeBarnTab {
         this.driver = driver;
     }
 
-    public void goToDistributeTab() {
+    @Override
+    public void focus() {
+        // TODO Auto-generated method stub
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(distributeTabPath));
 
