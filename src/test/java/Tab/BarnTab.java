@@ -60,14 +60,7 @@ public class BarnTab implements IHompageTab {
         driver.findElement(addBarnPath).click();
         fillCreateForm(item);
 
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(2))
-                    .until(ExpectedConditions.elementToBeClickable(submitBtnPath));
-            return true;
-        } catch (TimeoutException e) {
-            System.out.println("ERROR: " + e.getStackTrace());
-            return false;
-        }
+        return driver.findElement(submitBtnPath).isEnabled();
     }
 
     public void createBarn(BarnItem item) {
