@@ -57,7 +57,6 @@ public class TestCreateNewBazaarItem {
         merchantPage.createItem(item);
 
         // STEP-6
-        Thread.sleep(1000);
         BazaarItem newItem = merchantPage.getLastItem();
 
         // STEP-7
