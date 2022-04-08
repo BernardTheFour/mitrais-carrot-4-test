@@ -2,7 +2,7 @@ package Test;
 
 import Pages.Global;
 import Pages.LoginPage;
-import Pages.ManagerShareCarrot;
+import Pages.Manager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,14 +16,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestManagerShareCarrot {
     static WebDriver driver;
     static LoginPage loginPage;
-    static ManagerShareCarrot managerShareCarrot;
+    static Manager managerShareCarrot;
 
     @BeforeAll
     public static void beforeLogin(){
         Global.Init();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        managerShareCarrot = new ManagerShareCarrot(driver);
+        managerShareCarrot = new Manager(driver);
     }
 
     @Test
