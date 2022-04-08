@@ -21,7 +21,14 @@ public class ShareCarrotTab implements IHompageTab {
     By carrotAmountPath = By.xpath("//input[@name='CarrotAmount']");
     By descriptionPath = By.xpath("//textarea[@name='Description']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
-    By managerDistLastPagePath = By.xpath("//button[@id='pagination-last-page']");
+
+    // Distribution table locator
+    By lastTblItemRewardedToPath=By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='1']/div");
+    By lastTblItemQtyPath=By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
+    By lastTblItemDescPath=By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='3']/div");
+    By managerDistLastPageBtnPath = By.xpath("//button[@id='pagination-last-page']");
+
+
 
     public ShareCarrotTab(WebDriver driver){
         this.driver=driver;
@@ -43,7 +50,6 @@ public class ShareCarrotTab implements IHompageTab {
     public void recipientDropDownList(String recipient){
         Select drop = new Select(driver.findElement(recipientPath));
         drop.selectByVisibleText(recipient);
-
     }
 
     // Set Carrot Amount
@@ -54,83 +60,56 @@ public class ShareCarrotTab implements IHompageTab {
     // Set Description
     public void setDescription(String desc){
         driver.findElement(descriptionPath).sendKeys(desc);
-        //description.sendKeys(desc);
     }
 
     // Click submit button
     public void clickSubmitButton(){
         driver.findElement(submitBtnPath).click();
-        //submitBtn.click();
     }
 
     public void assertShareCarrotSuccess(String rewardedTo, String qty, String desc){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
-
-        // check if last page button can be clicked
-        WebElement distributionLastPageBtn = driver.findElement(managerDistLastPagePath);
-        WebElement table = driver.findElement(By.xpath("//div[@role='table']"));
-        //locate rows of table
-        List<WebElement> rows_table = table.findElements(By.className("rdt_TableRow"));
-        // check if row == 10
-        if(rows_table.size() == 10){
+        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
+        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+        if(tableRow > 10){
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", distributionLastPageBtn);
-            distributionLastPageBtn.click();
+            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
+            managerTblLastPageBtnElement.click();
         }
-        int last_row = rows_table.size()-1;
-        // get the column of the last row
-        List<WebElement> column_row = rows_table.get(last_row).findElements(By.className("sc-hKMtZM"));
-        // Assert rewarded to as expected
-        Assertions.assertEquals(rewardedTo, column_row.get(0).getText());
-        // Assert quantity to as expected
-        Assertions.assertEquals(qty,column_row.get(1).getText());
-        // Assert desc to as expected
-        Assertions.assertEquals(desc, column_row.get(2).getText());
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
+
+        Assertions.assertEquals(rewardedTo,driver.findElement(lastTblItemRewardedToPath).getText());
+        Assertions.assertEquals(qty, driver.findElement(lastTblItemQtyPath).getText());
+        Assertions.assertEquals(desc, driver.findElement(lastTblItemDescPath).getText());
     }
 
     public void assertShareValue(String qty){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
-
-        // check if last page button can be clicked
-        WebElement distributionLastPageBtn = driver.findElement(managerDistLastPagePath);
-        WebElement table = driver.findElement(By.xpath("//div[@role='table']"));
-        //locate rows of table
-        List<WebElement> rows_table = table.findElements(By.className("rdt_TableRow"));
-        // check if row == 10
-        if(rows_table.size() == 10){
+        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
+        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+        if(tableRow > 10){
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", distributionLastPageBtn);
-            distributionLastPageBtn.click();
+            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
+            managerTblLastPageBtnElement.click();
         }
-        int last_row = rows_table.size()-1;
-        // get the column of the last row
-        List<WebElement> column_row = rows_table.get(last_row).findElements(By.className("sc-hKMtZM"));
-        // Assert quantity to as expected
-        Assertions.assertNotEquals(qty,column_row.get(1).getText());
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
+        Assertions.assertNotEquals(qty, driver.findElement(lastTblItemQtyPath).getText());
     }
 
     public void assertShareNoReceiver(String rewardedTo){
-        WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
-
-        // check if last page button can be clicked
-        WebElement distributionLastPageBtn = driver.findElement(managerDistLastPagePath);
-        WebElement table = driver.findElement(By.xpath("//div[@role='table']"));
-        //locate rows of table
-        List<WebElement> rows_table = table.findElements(By.className("rdt_TableRow"));
-        // check if row == 10
-        if(rows_table.size() == 10){
+        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
+        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+        if(tableRow > 10){
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", distributionLastPageBtn);
-            distributionLastPageBtn.click();
+            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
+            managerTblLastPageBtnElement.click();
         }
-        int last_row = rows_table.size()-1;
-        // get the column of the last row
-        List<WebElement> column_row = rows_table.get(last_row).findElements(By.className("sc-hKMtZM"));
-        // Assert rewarded to as expected
-        Assertions.assertNotEquals(rewardedTo, column_row.get(0).getText());
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
+        Assertions.assertNotEquals(rewardedTo, driver.findElement(lastTblItemRewardedToPath).getText());
     }
 
 
