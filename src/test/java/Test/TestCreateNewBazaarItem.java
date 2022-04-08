@@ -4,6 +4,7 @@ import Dto.BazaarItem;
 import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,16 +45,20 @@ public class TestCreateNewBazaarItem {
     }
 
     @Test
-    public void createItemSuccess() throws InterruptedException {
+    public void createItemSuccess() {
+        Faker faker = new Faker();
         // STEP-3,4,5
         BazaarItem item = new BazaarItem(
-            "New Item",
-            "Description of new item",
-            "http://tny.im/rQb",
-            "2500","9", "1",
+            faker.commerce().productName(),
+            faker.company().catchPhrase(),
+            faker.company().logo(),
+            String.valueOf(faker.number().numberBetween(500, 5000)),
+            String.valueOf(faker.number().numberBetween(1, 20)),
+            "1",
             "07/04/2022",
             "07/05/2022"
         );
+
         merchantPage.merchTab().createItem(item);
 
         // STEP-6

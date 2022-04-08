@@ -9,6 +9,11 @@ public class Merchant extends HomePage {
     private MerchandiseTab merchTab;
     private BazaarTab bazaarTab;
 
+    public Merchant(WebDriver driver) {
+        super.driver = driver;
+        merchTab = new MerchandiseTab(driver);
+    }
+
     public MerchandiseTab merchTab() {
         return this.merchTab;
     }
@@ -17,8 +22,4 @@ public class Merchant extends HomePage {
         return this.bazaarTab;
     }
 
-    public Merchant(WebDriver driver) {
-        super.driver = driver;
-        merchTab = new MerchandiseTab(driver);
-    }    
 }
