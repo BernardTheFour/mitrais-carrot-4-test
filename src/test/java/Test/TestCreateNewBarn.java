@@ -1,5 +1,7 @@
 package Test;
 
+
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,8 +18,7 @@ import Pages.LoginPage;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreateNewBarn {
-    /**
-     * Test Scenario
+    /**Test Scenario
      * 1. Login as a farmer
      * 2. Click barn tab
      * 3. Click add barn button
@@ -41,14 +42,15 @@ public class TestCreateNewBarn {
         farmerPage = new Farmer(driver);
 
         // step-1
-        loginPage.login("user_farmer", "1234");
-        // step-2
-        farmerPage.goToBarnTab();
+        loginPage.login("user_farmer", "1234");          
     }
 
     @Test
     @Order(1)
-    public static void createBarnSuccess() {
+    public void createBarnSuccess() {
+        // step-2
+        farmerPage.goToBarnTab();
+        
         // step-3 to step-5
         BarnItem barn = new BarnItem(
                 "Barn 2023",

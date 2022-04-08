@@ -61,7 +61,6 @@ public class TestCreateNewBazaarItem {
         BazaarItem newItem = merchantPage.getLastItem();
 
         // STEP-7
-
         Assertions.assertEquals(item.getName(), newItem.getName());
         Assertions.assertEquals(item.getPrice(), newItem.getPrice());
         Assertions.assertEquals(item.getStock(), newItem.getStock());
