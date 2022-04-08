@@ -35,7 +35,7 @@ public class TestCreateNewBarn {
     private static Farmer farmerPage;
 
     @BeforeAll
-    public static void beforeLogin() {
+    public static void precondition() {
         Global.Init();
 
         driver = new ChromeDriver();
