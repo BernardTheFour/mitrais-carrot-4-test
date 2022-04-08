@@ -54,7 +54,7 @@ public class TestCreateNewBazaarItem {
             "07/04/2022",
             "07/05/2022"
         );
-        merchantPage.merchTab.createItem(item);
+        merchantPage.merchTab().createItem(item);
 
         // STEP-6
         BazaarItem newItem = merchantPage.merchTab().getLastItem();
