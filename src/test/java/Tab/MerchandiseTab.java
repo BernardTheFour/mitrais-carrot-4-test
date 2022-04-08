@@ -1,11 +1,12 @@
 package Tab;
 
 import Dto.BazaarItem;
+import Pages.Global;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -41,7 +42,7 @@ public class MerchandiseTab implements IHompageTab {
 
     @Override
     public void focus() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(merchTabPath));
 
         driver.findElement(merchTabPath).click();
@@ -57,6 +58,7 @@ public class MerchandiseTab implements IHompageTab {
         BazaarItem newItem = new BazaarItem();
         WebElement merchTblLastPageBtnElement = driver.findElement(merchTblLastPageBtnPath);
         int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+
         if (tableRow == 10) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView(true);", merchTblLastPageBtnElement);

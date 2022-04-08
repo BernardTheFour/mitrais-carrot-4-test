@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.Locale;
-
 public class TestCreateNewBazaarItem {
     private static WebDriver driver;
     private static LoginPage loginPage;
@@ -47,7 +45,7 @@ public class TestCreateNewBazaarItem {
     }
 
     @Test
-    public void createItemSuccess() throws InterruptedException {
+    public void createItemSuccess() {
         Faker faker = new Faker();
         // STEP-3,4,5
         BazaarItem item = new BazaarItem(
@@ -60,7 +58,8 @@ public class TestCreateNewBazaarItem {
             "07/04/2022",
             "07/05/2022"
         );
-        merchantPage.merchTab.createItem(item);
+
+        merchantPage.merchTab().createItem(item);
 
         // STEP-6
         BazaarItem newItem = merchantPage.merchTab().getLastItem();

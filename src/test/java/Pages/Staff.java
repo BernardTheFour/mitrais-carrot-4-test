@@ -2,10 +2,16 @@ package Pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class Staff extends HomePage {
+import Tab.BazaarTab;
 
-    public Staff(WebDriver driver){
+public class Staff extends HomePage {
+    private BazaarTab bazaarTab;
+
+    public BazaarTab bazaarTab() {
+        return this.bazaarTab;
+    }
+
+    public Staff(WebDriver driver) {
         super.driver = driver;
     }
-    
 }

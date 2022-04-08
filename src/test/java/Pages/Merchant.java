@@ -1,11 +1,13 @@
 package Pages;
 
+import Tab.BazaarTab;
 import Tab.MerchandiseTab;
 import org.openqa.selenium.WebDriver;
 
 public class Merchant extends HomePage {
 
-    public MerchandiseTab merchTab;
+    private MerchandiseTab merchTab;
+    private BazaarTab bazaarTab;
 
     public Merchant(WebDriver driver) {
         super.driver = driver;
@@ -14,6 +16,10 @@ public class Merchant extends HomePage {
 
     public MerchandiseTab merchTab() {
         return this.merchTab;
+    }
+
+    public BazaarTab bazaarTab(){
+        return this.bazaarTab;
     }
 
 }
