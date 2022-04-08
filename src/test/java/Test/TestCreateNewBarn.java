@@ -12,9 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import Dto.BarnItem;
-import Pages.Farmer;
 import Pages.Global;
 import Pages.LoginPage;
+import Pages.Farmer;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreateNewBarn {
@@ -49,7 +49,7 @@ public class TestCreateNewBarn {
     @Order(1)
     public void createBarnSuccess() {
         // step-2
-        farmerPage.goToBarnTab();
+        farmerPage.barnTab().focus();
         
         // step-3 to step-5
         BarnItem barn = new BarnItem(
@@ -58,7 +58,7 @@ public class TestCreateNewBarn {
                 "250",
                 "01/01/2023",
                 "31/12/2023");
-        farmerPage.createBarn(barn);
+        farmerPage.barnTab().createBarn(barn);
     }
 
     @AfterAll
