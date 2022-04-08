@@ -71,6 +71,4 @@ public class TestManagerCannotShareCarrot {
         //Terminate the WebDriver
         driver.quit();
     }
-
-
 }
