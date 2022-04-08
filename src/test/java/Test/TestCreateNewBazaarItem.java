@@ -40,7 +40,7 @@ public class TestCreateNewBazaarItem {
         loginPage.login("user_merchant", "1234");
 
         // STEP-2
-        merchantPage.goToMerchTab();
+        merchantPage.merchTab().focus();
     }
 
     @Test
@@ -54,10 +54,10 @@ public class TestCreateNewBazaarItem {
             "07/04/2022",
             "07/05/2022"
         );
-        merchantPage.createItem(item);
+        merchantPage.merchTab.createItem(item);
 
         // STEP-6
-        BazaarItem newItem = merchantPage.getLastItem();
+        BazaarItem newItem = merchantPage.merchTab().getLastItem();
 
         // STEP-7
         Assertions.assertEquals(item.getName(), newItem.getName());
