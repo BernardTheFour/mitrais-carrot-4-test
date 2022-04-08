@@ -5,10 +5,8 @@ import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,7 +15,7 @@ public class TestCreateNewBazaarItem {
     private static LoginPage loginPage;
     private static Merchant merchantPage;
 
-    /* Test Scenario
+    /** Test Scenario
     * 1. Login into Mitrais Carrot as Merchant
     * 2. Click merchandise tab
     * 3. Click add item button
@@ -26,9 +24,8 @@ public class TestCreateNewBazaarItem {
     * 6. Record newly inserted data in the table
     * 7. Compare 4 & 6
     * 8. Clear cookies, quit driver
-    * */
+    */
 
-    // Before all tests
     @BeforeAll
     public static void beforeLogin() {
         Global.Init();
@@ -39,6 +36,12 @@ public class TestCreateNewBazaarItem {
 
         // STEP-1
         loginPage.login("user_merchant", "1234");
+    }
+
+    @BeforeEach
+    public void beforeCreate() {
+        ((JavascriptExecutor) driver)
+                .executeScript("window.scrollTo(0, -document.body.scrollHeight)");
 
         // STEP-2
         merchantPage.merchTab().focus();
@@ -70,12 +73,17 @@ public class TestCreateNewBazaarItem {
         Assertions.assertEquals(item.getStock(), newItem.getStock());
     }
 
-    // After all tests
+    @Test
+    public void createItemFailed() {
+        merchantPage.merchTab().createEmptyItem();
+        String expectedErrorMsg = "All field must be filled!";
+        merchantPage.merchTab().assertErrorMessage(expectedErrorMsg);
+    }
+
     @AfterAll
     public static void clearAll() {
         // STEP-8
         driver.manage().deleteAllCookies();
         driver.quit();
-
     }
 }
