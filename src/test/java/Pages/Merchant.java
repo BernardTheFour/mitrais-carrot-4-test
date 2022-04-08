@@ -62,7 +62,7 @@ public class Merchant extends HomePage {
         newItem.setName(driver.findElement(lastTblItemNamePath).getText());
         newItem.setPrice(driver.findElement(lastTblItemPricePath).getText());
         newItem.setStock(driver.findElement(lastTblItemStockPath).getText());
-
+        System.out.println(newItem);
         return newItem;
     }
 }

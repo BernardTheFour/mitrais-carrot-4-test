@@ -4,7 +4,6 @@ import Dto.BazaarItem;
 import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,7 +44,7 @@ public class TestCreateNewBazaarItem {
     }
 
     @Test
-    public void createItemSuccess() {
+    public void createItemSuccess() throws InterruptedException {
         // STEP-3,4,5
         BazaarItem item = new BazaarItem(
             "New Item",
@@ -58,6 +57,7 @@ public class TestCreateNewBazaarItem {
         merchantPage.createItem(item);
 
         // STEP-6
+        Thread.sleep(1000);
         BazaarItem newItem = merchantPage.getLastItem();
 
         // STEP-7

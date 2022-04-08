@@ -17,12 +17,12 @@ public class Manager extends HomePage {
     WebDriver driver;
 
     // Locators
-    By shareCarrotTab = By.xpath("//h3[normalize-space()='Share Carrot']");
-    By shareCarrotBtn = By.xpath("(//button[contains(text(),'Share Carrot')])[1]");
-    By recipient = By.xpath("//select[@class='form-select']");
-    By carrotAmount = By.xpath("//input[@name='CarrotAmount']");
-    By description = By.xpath("//textarea[@name='Description']");
-    By submitBtn = By.xpath("//button[normalize-space()='Submit']");
+    By shareCarrotTabPath = By.xpath("//h3[normalize-space()='Share Carrot']");
+    By shareCarrotBtnPath = By.xpath("(//button[contains(text(),'Share Carrot')])[1]");
+    By recipientPath = By.xpath("//select[@class='form-select']");
+    By carrotAmountPath = By.xpath("//input[@name='CarrotAmount']");
+    By descriptionPath = By.xpath("//textarea[@name='Description']");
+    By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
 
     public Manager(WebDriver driver){
         this.driver=driver;
@@ -32,44 +32,44 @@ public class Manager extends HomePage {
     // click on Share Carrot tab
     public void clickShareCarrotTab(){
         WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTab));
-        driver.findElement(shareCarrotTab).click();
+        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
+        driver.findElement(shareCarrotTabPath).click();
     }
 
     // click on Share Carrot Button
     public void clickShareCarrotBtn(){
 
-        driver.findElement(shareCarrotBtn).click();
+        driver.findElement(shareCarrotBtnPath).click();
     }
 
     // select recipient
     public void recipientDropDownList(int index){
-        Select drop = new Select(driver.findElement(recipient));
+        Select drop = new Select(driver.findElement(recipientPath));
         drop.selectByIndex(index);
     }
 
     // Set Carrot Amount
     public void setCarrotAmount(String carrot){
 
-        driver.findElement(carrotAmount).sendKeys(carrot);
+        driver.findElement(carrotAmountPath).sendKeys(carrot);
     }
 
     // Set Description
     public void setDescription(String desc){
 
-        driver.findElement(description).sendKeys(desc);
+        driver.findElement(descriptionPath).sendKeys(desc);
         //description.sendKeys(desc);
     }
 
     // Click submit button
     public void clickSubmitButton(){
-        driver.findElement(submitBtn).click();
+        driver.findElement(submitBtnPath).click();
         //submitBtn.click();
     }
 
     public void assertShareCarrotSuccess(String rewardedTo, String qty, String desc){
         WebDriverWait waitWeb = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTab));
+        waitWeb.until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
 
         WebElement table = driver.findElement(By.xpath("//div[@role='table']"));
         //locate rows of table
