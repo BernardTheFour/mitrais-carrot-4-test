@@ -20,6 +20,7 @@ public class ShareCarrotTab implements IHompageTab {
     By carrotAmountPath = By.xpath("//input[@name='CarrotAmount']");
     By descriptionPath = By.xpath("//textarea[@name='Description']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
+    By closeModalBtnPath = By.xpath("//button[normalize-space()='Close']");
 
     // Distribution table locator
     By lastTblItemRewardedToPath=By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='1']/div");
@@ -66,6 +67,13 @@ public class ShareCarrotTab implements IHompageTab {
         driver.findElement(submitBtnPath).click();
     }
 
+    public boolean isButtonEnabled(){
+        return driver.findElement(submitBtnPath).isEnabled();
+    }
+
+    public void closeModalShare(){
+        driver.findElement(closeModalBtnPath).click();
+    }
     public void assertShareCarrotSuccess(String rewardedTo, String qty, String desc){
         WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
         int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
