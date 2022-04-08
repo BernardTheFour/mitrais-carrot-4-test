@@ -12,33 +12,32 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestManagerShareCarrot {
     static WebDriver driver;
     static LoginPage loginPage;
-    static Manager managerShareCarrot;
+    static Manager manager;
 
     @BeforeAll
     public static void beforeLogin(){
         Global.Init();
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        managerShareCarrot = new Manager(driver);
+        manager = new Manager(driver);
     }
 
     @Test
     @Order(1)
     public void shareCarrotSuccess(){
         loginPage.login("user_manager_agus", "1234");
-        managerShareCarrot.clickShareCarrotTab();
-        managerShareCarrot.clickShareCarrotBtn();
-        managerShareCarrot.recipientDropDownList("Susi");
-        managerShareCarrot.setCarrotAmount("20");
-        managerShareCarrot.setDescription("automated description");
-        managerShareCarrot.clickSubmitButton();
+        manager.shareCarrotTab().focus();
+        manager.shareCarrotTab().clickShareCarrotBtn();
+        manager.shareCarrotTab().recipientDropDownList("Susi");
+        manager.shareCarrotTab().setCarrotAmount("20");
+        manager.shareCarrotTab().setDescription("automated description");
+        manager.shareCarrotTab().clickSubmitButton();
     }
 
     @Test
     @Order(2)
     public void assertShareCarrot(){
-        managerShareCarrot.clickShareCarrotTab();
-        managerShareCarrot.assertShareCarrotSuccess("Susi", "20", "automated description");
+        manager.shareCarrotTab().assertShareCarrotSuccess("Susi", "20", "automated description");
     }
 
     @AfterEach

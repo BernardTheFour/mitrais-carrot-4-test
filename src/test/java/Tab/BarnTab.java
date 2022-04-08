@@ -54,7 +54,6 @@ public class BarnTab implements IHompageTab {
         driver.findElement(addBarnPath).click();
         fillCreateForm(item);
         driver.findElement(submitBtnPath).click();
-        ;
     }
 
     private void fillCreateForm(BarnItem item) {
