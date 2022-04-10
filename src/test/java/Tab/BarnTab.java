@@ -1,6 +1,5 @@
 package Tab;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -52,7 +51,9 @@ public class BarnTab implements IHompageTab {
     }
 
     public void closeBarnPopUp() {
-        driver.findElement(closeButtonPath).click();
+        if ( driver.findElement(closeButtonPath).isDisplayed()) {
+            driver.findElement(closeButtonPath).click();
+        }
     }
 
     public void createBarn(BarnItem item) {
@@ -90,7 +91,6 @@ public class BarnTab implements IHompageTab {
         driver.findElement(endDatePath).sendKeys(item.getEndDate());
     }
 
-    
     private boolean canSubmit(BarnItem item) {
         driver.findElement(addBarnPath).click();
         fillCreateForm(item);
@@ -98,14 +98,13 @@ public class BarnTab implements IHompageTab {
         return driver.findElement(submitBtnPath).isEnabled();
     }
 
-
-    public void assertEquals(BarnItem expected, BarnItem actual){
+    public void assertEquals(BarnItem expected, BarnItem actual) {
         Assertions.assertEquals(expected.getName(), actual.getName());
         Assertions.assertEquals(expected.getInitialCarrot(), actual.getInitialCarrot());
         Assertions.assertEquals(expected.getEndDate(), actual.getEndDate());
     }
 
-    public void assertCanSubmitForm(boolean expected, BarnItem item){
+    public void assertCanSubmitForm(boolean expected, BarnItem item) {
         Assertions.assertEquals(expected, canSubmit(item));
     }
 }

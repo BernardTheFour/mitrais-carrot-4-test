@@ -14,8 +14,7 @@ import Pages.Global;
 import Pages.LoginPage;
 
 public class TestCannotCreateBarn {
-    /**
-     * TEST SCENARIO
+    /** TEST SCENARIO
      * 1. Login as a farmer
      * 2. Click barn tab
      * 3. Click add barn button
