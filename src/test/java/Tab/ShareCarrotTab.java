@@ -105,19 +105,19 @@ public class ShareCarrotTab implements IHompageTab {
         Assertions.assertNotEquals(qty, driver.findElement(lastTblItemQtyPath).getText());
     }
 
-    public void assertShareNoReceiver(String rewardedTo){
-        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
-        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
-        if(tableRow > 10){
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
-            managerTblLastPageBtnElement.click();
-        }
-
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
-        Assertions.assertNotEquals(rewardedTo, driver.findElement(lastTblItemRewardedToPath).getText());
-    }
+//    public void assertShareNoReceiver(String rewardedTo){
+//        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
+//        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+//        if(tableRow > 10){
+//            JavascriptExecutor js = (JavascriptExecutor) driver;
+//            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
+//            managerTblLastPageBtnElement.click();
+//        }
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(10))
+//                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
+//        Assertions.assertNotEquals(rewardedTo, driver.findElement(lastTblItemRewardedToPath).getText());
+//    }
 
 
 }
