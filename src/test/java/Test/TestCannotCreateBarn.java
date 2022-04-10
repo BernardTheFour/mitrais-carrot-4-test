@@ -3,7 +3,6 @@ package Test;
 import com.github.javafaker.Faker;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -15,8 +14,7 @@ import Pages.Global;
 import Pages.LoginPage;
 
 public class TestCannotCreateBarn {
-    /**
-     * TEST SCENARIO
+    /** TEST SCENARIO
      * 1. Login as a farmer
      * 2. Click barn tab
      * 3. Click add barn button
@@ -53,7 +51,7 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -74,9 +72,10 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -97,9 +96,10 @@ public class TestCannotCreateBarn {
                 "-1",
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -120,9 +120,10 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01//2023",
                 "");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 

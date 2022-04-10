@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Pages.Global;
+
 import java.time.Duration;
 
 public class ShareCarrotTab implements IHompageTab {
@@ -36,7 +39,7 @@ public class ShareCarrotTab implements IHompageTab {
 
     @Override
     public void focus() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
         driver.findElement(shareCarrotTabPath).click();
     }
