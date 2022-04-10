@@ -97,7 +97,7 @@ public class BarnTab implements IHompageTab {
         return barnItem;
     }
 
-    public void assertEqual(BarnItem expected, BarnItem actual){
+    public void assertEquals(BarnItem expected, BarnItem actual){
         Assertions.assertEquals(expected.getName(), actual.getName());
         Assertions.assertEquals(expected.getInitialCarrot(), actual.getInitialCarrot());
         Assertions.assertEquals(expected.getEndDate(), actual.getEndDate());
