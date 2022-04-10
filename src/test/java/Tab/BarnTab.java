@@ -1,10 +1,9 @@
 package Tab;
 
-import java.time.Duration;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -96,5 +95,15 @@ public class BarnTab implements IHompageTab {
         barnItem.setEndDate(driver.findElement(lastTblExpiredPath).getText());
 
         return barnItem;
+    }
+
+    public void assertEqual(BarnItem expected, BarnItem actual){
+        Assertions.assertEquals(expected.getName(), actual.getName());
+        Assertions.assertEquals(expected.getInitialCarrot(), actual.getInitialCarrot());
+        Assertions.assertEquals(expected.getEndDate(), actual.getEndDate());
+    }
+
+    public void assertCanSubmitForm(boolean expected, BarnItem item){
+        Assertions.assertEquals(expected, canSubmit(item));
     }
 }

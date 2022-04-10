@@ -68,9 +68,7 @@ public class TestCreateNewBarn {
         BarnItem newItem = farmerPage.barnTab().getLastItem();
 
         // step-7
-        Assertions.assertEquals(item.getName(), newItem.getName());
-        Assertions.assertEquals(item.getInitialCarrot(), newItem.getInitialCarrot());
-        Assertions.assertEquals(item.getEndDate(), newItem.getEndDate());
+        farmerPage.barnTab().assertEquals(item, newItem);
     }
 
     @AfterAll

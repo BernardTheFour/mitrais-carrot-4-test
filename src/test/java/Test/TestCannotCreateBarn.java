@@ -53,7 +53,7 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -74,9 +74,10 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -97,9 +98,10 @@ public class TestCannotCreateBarn {
                 "-1",
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
@@ -120,9 +122,10 @@ public class TestCannotCreateBarn {
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01//2023",
                 "");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
+
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
         farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
+        farmerPage.barnTab().assertCanSubmitForm(false, item2);
         farmerPage.barnTab().closeBarnPopUp();
     }
 
