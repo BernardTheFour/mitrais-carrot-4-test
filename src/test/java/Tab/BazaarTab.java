@@ -21,11 +21,13 @@ public class BazaarTab implements IHompageTab {
     By shareHistoryPath = By.xpath("//button[normalize-space()='SHARE']");
     By purchaseHistoryPath = By.xpath("//button[normalize-space()='PURCHASE']");
     By lastPageBtnPath = By.xpath("//button[@id='pagination-last-page']//*[name()='svg']");
+    By itemNamePath = By.xpath("//div[@class='modal-title h4']");
 
     // Buying item
     String itemPath = "//button";
     By amountFieldPath = By.xpath("//input[@placeholder='Amount']"); // need to clear field first by using find ele().clear()
     By payBtnPath = By.xpath("//div[@class='modal-footer']//button[@type='button']");
+    By closePayBtnPath = By.xpath("//button[@aria-label='Close']");
 
     // Carrot history table locator
     By purchaseColPath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
@@ -56,7 +58,18 @@ public class BazaarTab implements IHompageTab {
         js.executeScript("arguments[0].click();", itemBuyBtnElement);
         driver.findElement(amountFieldPath).clear(); // clear the field for the default value
         driver.findElement(amountFieldPath).sendKeys(qty);
-        driver.findElement(payBtnPath).click();
+        if(isButtonEnabled()){
+            driver.findElement(payBtnPath).click();
+        }
+
+    }
+
+    public boolean isButtonEnabled(){
+        return driver.findElement(payBtnPath).isEnabled();
+    }
+
+    public void closeModalPay(){
+        driver.findElement(closePayBtnPath).click();
     }
 
     public void assertPurchaseHistory(String item, String qty){
