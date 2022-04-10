@@ -55,25 +55,10 @@ public class BarnTab implements IHompageTab {
         driver.findElement(closeButtonPath).click();
     }
 
-    public boolean canSubmit(BarnItem item) {
-        driver.findElement(addBarnPath).click();
-        fillCreateForm(item);
-
-        return driver.findElement(submitBtnPath).isEnabled();
-    }
-
     public void createBarn(BarnItem item) {
         driver.findElement(addBarnPath).click();
         fillCreateForm(item);
         driver.findElement(submitBtnPath).click();
-    }
-
-    private void fillCreateForm(BarnItem item) {
-        driver.findElement(itemNamePath).sendKeys(item.getName());
-        driver.findElement(initCarrotPath).sendKeys(item.getInitialCarrot());
-        driver.findElement(birthCarrotPath).sendKeys(item.getBirthdayCarrot());
-        driver.findElement(startDatePath).sendKeys(item.getStartDate());
-        driver.findElement(endDatePath).sendKeys(item.getEndDate());
     }
 
     public BarnItem getLastItem() {
@@ -96,6 +81,23 @@ public class BarnTab implements IHompageTab {
 
         return barnItem;
     }
+
+    private void fillCreateForm(BarnItem item) {
+        driver.findElement(itemNamePath).sendKeys(item.getName());
+        driver.findElement(initCarrotPath).sendKeys(item.getInitialCarrot());
+        driver.findElement(birthCarrotPath).sendKeys(item.getBirthdayCarrot());
+        driver.findElement(startDatePath).sendKeys(item.getStartDate());
+        driver.findElement(endDatePath).sendKeys(item.getEndDate());
+    }
+
+    
+    private boolean canSubmit(BarnItem item) {
+        driver.findElement(addBarnPath).click();
+        fillCreateForm(item);
+
+        return driver.findElement(submitBtnPath).isEnabled();
+    }
+
 
     public void assertEquals(BarnItem expected, BarnItem actual){
         Assertions.assertEquals(expected.getName(), actual.getName());
