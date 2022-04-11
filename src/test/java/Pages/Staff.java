@@ -13,5 +13,6 @@ public class Staff extends HomePage {
 
     public Staff(WebDriver driver) {
         super.driver = driver;
+        bazaarTab = new BazaarTab(driver);
     }
 }
