@@ -32,23 +32,20 @@ public class TestManagerShareCarrot {
         manager.shareCarrotTab().setCarrotAmount("20");
         manager.shareCarrotTab().setDescription("automated description");
         manager.shareCarrotTab().clickSubmitButton();
-    }
-
-    @Test
-    @Order(2)
-    public void assertShareCarrot(){
         manager.shareCarrotTab().assertShareCarrotSuccess("Susi", "20", "automated description");
     }
 
-    @AfterEach
-    public void clearCache(){
-        //Delete cookies to logout user
-        driver.manage().deleteAllCookies();
-    }
+    // @Test
+    // @Order(2)
+    // public void assertShareCarrot(){
+        
+    // }
+
     //After all tests
     @AfterAll
     public static void closeBrowser(){
         //Terminate the WebDriver
+        driver.manage().deleteAllCookies();
         driver.quit();
     }
 }

@@ -5,12 +5,12 @@ import Pages.Global;
 import Pages.LoginPage;
 import Pages.Merchant;
 import com.github.javafaker.Faker;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestUpdateBazaarItem {
     private static WebDriver driver;
     private static LoginPage loginPage;
@@ -37,6 +37,7 @@ public class TestUpdateBazaarItem {
     }
 
     @Test
+    @Order(1)
     public void updateItemSuccess() {
         Faker faker = new Faker();
         BazaarItem item = new BazaarItem(
@@ -58,7 +59,7 @@ public class TestUpdateBazaarItem {
     }
 
     @Test
-    @Ignore
+    @Order(2)
     public void updateItemFailed() {
         merchantPage.merchTab().updateEmptyItem();
         String expectedErrorMsg = "All field must be filled!";

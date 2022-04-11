@@ -38,24 +38,12 @@ public class TestManagerCannotShareCarrot {
 
     @Test
     @Order(2)
-    public void assertShareCarrotNegValue(){
-        manager.shareCarrotTab().assertShareValue( "-123");
-    }
-
-    @Test
-    @Order(3)
     public void exceedFrozenCarrot(){
         manager.shareCarrotTab().clickShareCarrotBtn();
         manager.shareCarrotTab().recipientDropDownList("Staff");
         manager.shareCarrotTab().setCarrotAmount("999999999"); // exceed frozen carrot of manager
         manager.shareCarrotTab().setDescription("exceed frozen carrot automated");
         manager.shareCarrotTab().clickSubmitButton();
-    }
-
-    @Test
-    @Order(4)
-    public void assertShareCarrotExceed(){
-        manager.shareCarrotTab().assertShareValue("999999999");
     }
 
 
