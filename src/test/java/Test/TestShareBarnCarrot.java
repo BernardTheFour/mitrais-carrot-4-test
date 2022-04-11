@@ -86,7 +86,7 @@ public class TestShareBarnCarrot {
         // step-12
         managerPage.carroDashBoard().focus();
         int balanceNew = managerPage.carroDashBoard().getCarrotBalance();
-        managerPage.carroDashBoard().assertCarrotBalance(balance + randNumber, balanceNew);
+        managerPage.carroDashBoard().assertCarrotBalance(true, balance + randNumber, balanceNew);
     }
 
     @AfterAll

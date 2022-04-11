@@ -18,8 +18,7 @@ public class DistributeBarnTab implements IHompageTab {
 
     // Locators for distribute carrot
     By shareBtnPath = By.xpath("//button[normalize-space()='Share Carrot']");
-    By availableCarrotPath = By
-            .xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[1]/table[1]/tbody[1]/tr[2]/td");
+    By availableCarrotPath = By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[1]/table[1]/tbody[1]/tr[2]/td");
     By receiverCarrotPath = By.xpath("//select[@class='form-select']");
     By carrotAmountPath = By.xpath("//input[@name='CarrotAmount']");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
@@ -49,9 +48,16 @@ public class DistributeBarnTab implements IHompageTab {
         driver.findElement(submitBtnPath).click();
     }
 
+    public int getAvailableCarrot() {
+        System.out.println("CARROT: " + driver.findElement(availableCarrotPath).getText());
+        return Integer.valueOf(driver.findElement(availableCarrotPath).getText());
+    }
+
     private void fillShareForm(ShareBarn item) {
-        Select drop = new Select(driver.findElement(receiverCarrotPath));
-        drop.selectByVisibleText(item.getReceiver());
+        if (!item.getReceiver().isEmpty()) {
+            Select drop = new Select(driver.findElement(receiverCarrotPath));
+            drop.selectByVisibleText(item.getReceiver());
+        }
         driver.findElement(carrotAmountPath).sendKeys(item.getCarrot());
     }
 

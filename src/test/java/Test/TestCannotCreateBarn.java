@@ -14,7 +14,8 @@ import Pages.Global;
 import Pages.LoginPage;
 
 public class TestCannotCreateBarn {
-    /** TEST SCENARIO
+    /**
+     * TEST SCENARIO
      * 1. Login as a farmer
      * 2. Click barn tab
      * 3. Click add barn button
@@ -26,6 +27,8 @@ public class TestCannotCreateBarn {
     private static WebDriver driver;
     private static LoginPage loginPage;
     private static Farmer farmerPage;
+
+    private Faker faker = new Faker();
 
     @BeforeAll
     public static void precondition() {
@@ -41,24 +44,26 @@ public class TestCannotCreateBarn {
         farmerPage.barnTab().focus();
     }
 
+    private void assertAndClose(BarnItem item) {
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
+        farmerPage.barnTab().closeBarnPopUp();
+    }
+
     @Test
     public void noName() {
-        // step-3 to step-4
-        Faker faker = new Faker();
+        // no name / title
         BarnItem item = new BarnItem(
                 "",
                 String.valueOf(faker.number().numberBetween(10000, 100000)),
                 String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        farmerPage.barnTab().assertCanSubmitForm(false, item);
-        farmerPage.barnTab().closeBarnPopUp();
+        assertAndClose(item);
     }
 
     @Test
     public void unsupportedInitialCarrot() {
         // null initial carrot
-        Faker faker = new Faker();
         BarnItem item = new BarnItem(
                 faker.ancient().god(),
                 "",
@@ -73,16 +78,13 @@ public class TestCannotCreateBarn {
                 "01/01/2023",
                 "31/12/2023");
 
-        farmerPage.barnTab().assertCanSubmitForm(false, item);
-        farmerPage.barnTab().closeBarnPopUp();
-        farmerPage.barnTab().assertCanSubmitForm(false, item2);
-        farmerPage.barnTab().closeBarnPopUp();
+        assertAndClose(item);
+        assertAndClose(item2);
     }
 
     @Test
     public void unsupportedBirthdayCarrot() {
         // null initial carrot
-        Faker faker = new Faker();
         BarnItem item = new BarnItem(
                 faker.ancient().god(),
                 String.valueOf(faker.number().numberBetween(10000, 100000)),
@@ -97,16 +99,13 @@ public class TestCannotCreateBarn {
                 "01/01/2023",
                 "31/12/2023");
 
-        farmerPage.barnTab().assertCanSubmitForm(false, item);
-        farmerPage.barnTab().closeBarnPopUp();
-        farmerPage.barnTab().assertCanSubmitForm(false, item2);
-        farmerPage.barnTab().closeBarnPopUp();
+        assertAndClose(item);
+        assertAndClose(item2);
     }
 
     @Test
     public void unsupportedDate() {
         // start date
-        Faker faker = new Faker();
         BarnItem item = new BarnItem(
                 faker.ancient().god(),
                 String.valueOf(faker.number().numberBetween(10000, 100000)),
@@ -121,10 +120,8 @@ public class TestCannotCreateBarn {
                 "01//2023",
                 "");
 
-        farmerPage.barnTab().assertCanSubmitForm(false, item);
-        farmerPage.barnTab().closeBarnPopUp();
-        farmerPage.barnTab().assertCanSubmitForm(false, item2);
-        farmerPage.barnTab().closeBarnPopUp();
+        assertAndClose(item);
+        assertAndClose(item2);
     }
 
     @AfterAll

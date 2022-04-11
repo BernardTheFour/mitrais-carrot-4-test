@@ -1,5 +1,6 @@
 package Tab;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +38,12 @@ public class CarrotDashBoard implements IHompageTab {
         return Integer.parseInt(text);
     }
 
-    public void assertCarrotBalance(int expected, int actual){
-        Assertions.assertEquals(expected, actual);
+    public void assertCarrotBalance(boolean isEqual, int expected, int actual) {
+        if (isEqual) {
+            Assertions.assertEquals(expected, actual);
+            return;
+        }
+
+        Assertions.assertNotEquals(expected, actual);
     }
 }
