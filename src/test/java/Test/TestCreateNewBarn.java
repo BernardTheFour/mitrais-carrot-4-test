@@ -2,8 +2,9 @@ package Test;
 
 
 
+import com.github.javafaker.Faker;
+
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -53,10 +54,11 @@ public class TestCreateNewBarn {
         farmerPage.barnTab().focus();
         
         // step-3 to step-5
+        Faker faker = new Faker();
         BarnItem item = new BarnItem(
-                "Barn 2023",
-                "150000",
-                "250",
+                faker.ancient().god(),
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
         farmerPage.barnTab().createBarn(item);
@@ -65,9 +67,7 @@ public class TestCreateNewBarn {
         BarnItem newItem = farmerPage.barnTab().getLastItem();
 
         // step-7
-        Assertions.assertEquals(item.getName(), newItem.getName());
-        Assertions.assertEquals(item.getInitialCarrot(), newItem.getInitialCarrot());
-        Assertions.assertEquals(item.getEndDate(), newItem.getEndDate());
+        farmerPage.barnTab().assertEquals(item, newItem);
     }
 
     @AfterAll

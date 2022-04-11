@@ -1,7 +1,8 @@
 package Test;
 
+import com.github.javafaker.Faker;
+
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,8 @@ public class TestCannotCreateBarn {
     private static LoginPage loginPage;
     private static Farmer farmerPage;
 
+    private Faker faker = new Faker();
+
     @BeforeAll
     public static void precondition() {
         Global.Init();
@@ -41,88 +44,89 @@ public class TestCannotCreateBarn {
         farmerPage.barnTab().focus();
     }
 
+    private void assertAndClose(BarnItem item) {
+        farmerPage.barnTab().assertCanSubmitForm(false, item);
+        farmerPage.barnTab().closeBarnPopUp();
+    }
+
     @Test
     public void noName() {
-        // step-3 to step-4
+        // no name / title
         BarnItem item = new BarnItem(
                 "",
-                "150000",
-                "250",
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
-        farmerPage.barnTab().closeBarnPopUp();
+        assertAndClose(item);
     }
 
     @Test
     public void unsupportedInitialCarrot() {
         // null initial carrot
         BarnItem item = new BarnItem(
-                "Barn 2",
+                faker.ancient().god(),
                 "",
-                "250",
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
         // negative number
         BarnItem item2 = new BarnItem(
-                "Barn 2",
+                faker.ancient().god(),
                 "-1",
-                "250",
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
-        farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
-        farmerPage.barnTab().closeBarnPopUp();
+
+        assertAndClose(item);
+        assertAndClose(item2);
     }
 
     @Test
     public void unsupportedBirthdayCarrot() {
         // null initial carrot
         BarnItem item = new BarnItem(
-                "Barn 2",
-                "100000",
+                faker.ancient().god(),
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
                 "",
                 "01/01/2023",
                 "31/12/2023");
         // negative number
         BarnItem item2 = new BarnItem(
-                "Barn 2",
-                "100000",
+                faker.ancient().god(),
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
                 "-1",
                 "01/01/2023",
                 "31/12/2023");
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
-        farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
-        farmerPage.barnTab().closeBarnPopUp();
+
+        assertAndClose(item);
+        assertAndClose(item2);
     }
 
     @Test
     public void unsupportedDate() {
         // start date
         BarnItem item = new BarnItem(
-                "Barn 2",
-                "100000",
-                "200",
+                faker.ancient().god(),
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "",
                 "31/12/2023");
         // end date
         BarnItem item2 = new BarnItem(
-                "Barn 2",
-                "100000",
-                "50",
+                faker.ancient().god(),
+                String.valueOf(faker.number().numberBetween(10000, 100000)),
+                String.valueOf(faker.number().numberBetween(500, 5000)),
                 "01//2023",
-                "");                
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item));
-        farmerPage.barnTab().closeBarnPopUp();
-        Assertions.assertEquals(false, farmerPage.barnTab().canSubmit(item2));
-        farmerPage.barnTab().closeBarnPopUp();
-    }   
+                "");
+
+        assertAndClose(item);
+        assertAndClose(item2);
+    }
 
     @AfterAll
-    public static void closeBrowser(){        
-        //Terminate the WebDriver
+    public static void closeBrowser() {
+        // Terminate the WebDriver
         driver.manage().deleteAllCookies();
         driver.quit();
     }

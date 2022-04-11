@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Pages.Global;
+
 import java.time.Duration;
 
 public class ShareCarrotTab implements IHompageTab {
@@ -36,7 +39,7 @@ public class ShareCarrotTab implements IHompageTab {
 
     @Override
     public void focus() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(shareCarrotTabPath));
         driver.findElement(shareCarrotTabPath).click();
     }
@@ -105,19 +108,19 @@ public class ShareCarrotTab implements IHompageTab {
         Assertions.assertNotEquals(qty, driver.findElement(lastTblItemQtyPath).getText());
     }
 
-    public void assertShareNoReceiver(String rewardedTo){
-        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
-        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
-        if(tableRow > 10){
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
-            managerTblLastPageBtnElement.click();
-        }
-
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
-        Assertions.assertNotEquals(rewardedTo, driver.findElement(lastTblItemRewardedToPath).getText());
-    }
+//    public void assertShareNoReceiver(String rewardedTo){
+//        WebElement managerTblLastPageBtnElement = driver.findElement(managerDistLastPageBtnPath);
+//        int tableRow =  driver.findElements(By.xpath("(//div[@role='table'])[1]/div[2]/*")).size();
+//        if(tableRow > 10){
+//            JavascriptExecutor js = (JavascriptExecutor) driver;
+//            js.executeScript("arguments[0].scrollIntoView(true);", managerTblLastPageBtnElement);
+//            managerTblLastPageBtnElement.click();
+//        }
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(10))
+//                .until(ExpectedConditions.visibilityOfElementLocated(lastTblItemRewardedToPath));
+//        Assertions.assertNotEquals(rewardedTo, driver.findElement(lastTblItemRewardedToPath).getText());
+//    }
 
 
 }
