@@ -19,10 +19,11 @@ public class MerchandiseTab implements IHompageTab {
     // Locators
     By merchTabPath = By.xpath("//h3[normalize-space()='Merchandise']");
     By createBtnPath = By.xpath("//button[normalize-space()='Add Item']");
+    By updateBtnPath = By.xpath("(//button[@type='button'][normalize-space()='Update'])[1]");
     By submitBtnPath = By.xpath("//button[normalize-space()='Submit']");
     By createErrMsgPath = By.xpath("//div[@role='alert']");
 
-    // Create Item Form Locators
+    // Item Form Locators
     By itemNamePath = By.xpath("//input[@name='ItemName']");
     By itemDescPath = By.xpath("//input[@name='ItemDescription']");
     By itemImgPath = By.xpath("//input[@name='ItemImg']");
@@ -51,12 +52,24 @@ public class MerchandiseTab implements IHompageTab {
 
     public void createItem(BazaarItem item) {
         driver.findElement(createBtnPath).click();
-        fillCreateForm(item);
+        fillCreateItemForm(item);
         driver.findElement(submitBtnPath).click();
     }
 
     public void createEmptyItem() {
         driver.findElement(createBtnPath).click();
+        driver.findElement(submitBtnPath).click();
+    }
+
+    public void updateItem(BazaarItem item) {
+        driver.findElement(updateBtnPath).click();
+        fillUpdateItemForm(item);
+        driver.findElement(submitBtnPath).click();
+    }
+
+    public void updateEmptyItem() {
+        driver.findElement(updateBtnPath).click();
+        clearUpdateItemForm();
         driver.findElement(submitBtnPath).click();
     }
 
@@ -87,7 +100,7 @@ public class MerchandiseTab implements IHompageTab {
         Assertions.assertEquals(expectedErrorMsg, driver.findElement(createErrMsgPath).getText());
     }
 
-    private void fillCreateForm(BazaarItem item) {
+    private void fillCreateItemForm(BazaarItem item) {
         driver.findElement(itemNamePath).sendKeys(item.getName());
         driver.findElement(itemDescPath).sendKeys(item.getDescription());
         driver.findElement(itemImgPath).sendKeys(item.getImage());
@@ -97,4 +110,24 @@ public class MerchandiseTab implements IHompageTab {
         driver.findElement(itemEndDatePath).sendKeys(item.getEndDate());
     }
 
+    private void fillUpdateItemForm(BazaarItem item) {
+        driver.findElement(itemNamePath).clear();
+        driver.findElement(itemNamePath).sendKeys(item.getName());
+        driver.findElement(itemDescPath).clear();
+        driver.findElement(itemDescPath).sendKeys(item.getDescription());
+        driver.findElement(itemImgPath).clear();
+        driver.findElement(itemImgPath).sendKeys(item.getImage());
+        driver.findElement(itemPricePath).clear();
+        driver.findElement(itemPricePath).sendKeys(item.getPrice());
+        driver.findElement(itemStockPath).clear();
+        driver.findElement(itemStockPath).sendKeys(item.getStock());
+        driver.findElement(itemStartDatePath).clear();
+        driver.findElement(itemStartDatePath).sendKeys(item.getStartDate());
+        driver.findElement(itemEndDatePath).clear();
+        driver.findElement(itemEndDatePath).sendKeys(item.getEndDate());
+    }
+
+    private void clearUpdateItemForm() {
+        driver.findElement(itemNamePath).clear();
+    }
 }
