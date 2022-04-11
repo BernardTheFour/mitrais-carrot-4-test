@@ -57,7 +57,6 @@ public class TestCreateNewBazaarItem {
             faker.company().logo(),
             String.valueOf(faker.number().numberBetween(500, 5000)),
             String.valueOf(faker.number().numberBetween(1, 20)),
-            "1",
             "07/04/2022",
             "07/05/2022"
         );
