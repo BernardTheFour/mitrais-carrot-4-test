@@ -4,14 +4,12 @@ import Dto.BazaarItem;
 import Pages.Global;
 
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 public class MerchandiseTab implements IHompageTab {
     WebDriver driver;
@@ -37,6 +35,14 @@ public class MerchandiseTab implements IHompageTab {
     By lastTblItemPricePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='2']/div");
     By lastTblItemStockPath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='3']/div");
     By merchTblLastPageBtnPath = By.xpath("(//button[@id='pagination-last-page'])[1]");
+
+    private final By[] updateFormInputs = {
+        itemNamePath,
+        itemDescPath,
+        itemImgPath,
+        itemPricePath,
+        itemStockPath
+    };
 
     public MerchandiseTab(WebDriver driver) {
         this.driver = driver;
@@ -128,6 +134,11 @@ public class MerchandiseTab implements IHompageTab {
     }
 
     private void clearUpdateItemForm() {
-        driver.findElement(itemNamePath).clear();
+        Arrays.stream(updateFormInputs)
+            .forEach(input -> {
+                driver.findElement(input).click();
+                driver.findElement(input).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+                driver.findElement(input).sendKeys(Keys.BACK_SPACE);
+            });
     }
 }
