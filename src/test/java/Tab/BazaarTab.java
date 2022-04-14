@@ -69,7 +69,10 @@ public class BazaarTab implements IHompageTab {
     }
 
     public void closeModalPay(){
-        driver.findElement(closePayBtnPath).click();
+        WebElement closePayBtnElement = driver.findElement(closePayBtnPath);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", closePayBtnElement);
+        js.executeScript("arguments[0].click();", closePayBtnElement);
     }
 
     public void assertPurchaseHistory(String item, String qty){

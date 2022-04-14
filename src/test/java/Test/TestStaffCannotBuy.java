@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestStaffCannotBuy {
     private static WebDriver driver;
     private static LoginPage loginPage;
@@ -43,6 +44,7 @@ public class TestStaffCannotBuy {
     public void totalPayMoreThanCarrot(){
         staff.bazaarTab().buyItem(4,"100");
         Assertions.assertEquals(false,staff.bazaarTab().isButtonEnabled());
+        staff.bazaarTab().closeModalPay();
     }
 
     @AfterEach

@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreateNewBazaarItem {
     private static WebDriver driver;
     private static LoginPage loginPage;
@@ -33,21 +34,19 @@ public class TestCreateNewBazaarItem {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         merchantPage = new Merchant(driver);
-
+        driver.manage().window().maximize();
         // STEP-1
         loginPage.login("user_merchant", "1234");
     }
 
     @BeforeEach
     public void beforeCreate() {
-        ((JavascriptExecutor) driver)
-                .executeScript("window.scrollTo(0, -document.body.scrollHeight)");
-
         // STEP-2
         merchantPage.merchTab().focus();
     }
 
     @Test
+    @Order(1)
     public void createItemSuccess() {
         Faker faker = new Faker();
         // STEP-3,4,5
@@ -73,6 +72,7 @@ public class TestCreateNewBazaarItem {
     }
 
     @Test
+    @Order(2)
     public void createItemFailed() {
         merchantPage.merchTab().createEmptyItem();
         String expectedErrorMsg = "All field must be filled!";

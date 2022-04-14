@@ -16,7 +16,6 @@ public class TestUpdateBazaarItem {
     private static LoginPage loginPage;
     private static Merchant merchantPage;
 
-
     @BeforeAll
     public static void beforeLogin() {
         Global.Init();
@@ -24,15 +23,12 @@ public class TestUpdateBazaarItem {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         merchantPage = new Merchant(driver);
-
+        driver.manage().window().maximize();
         loginPage.login("user_merchant", "1234");
     }
 
     @BeforeEach
     public void beforeUpdate() {
-        ((JavascriptExecutor) driver)
-                .executeScript("window.scrollTo(0, -document.body.scrollHeight)");
-
         merchantPage.merchTab().focus();
     }
 
@@ -64,6 +60,7 @@ public class TestUpdateBazaarItem {
         merchantPage.merchTab().updateEmptyItem();
         String expectedErrorMsg = "All field must be filled!";
         merchantPage.merchTab().assertErrorMessage(expectedErrorMsg);
+        merchantPage.merchTab().closeModal();
     }
 
     @AfterAll

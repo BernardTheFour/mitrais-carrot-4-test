@@ -29,6 +29,7 @@ public class MerchandiseTab implements IHompageTab {
     By itemStockPath = By.xpath("//input[@name='ItemStock']");
     By itemStartDatePath = By.xpath("//input[@name='ItemStartDate']");
     By itemEndDatePath = By.xpath("//input[@name='ItemEndDate']");
+    By modalCloseBtnPath = By.xpath("//button[@aria-label='Close']");
 
     // Merchandise Table Locators
     By lastTblItemNamePath = By.xpath("(//div[@role='table'])[1]/div[2]/div[last()]/div[@data-column-id='1']/div");
@@ -50,10 +51,21 @@ public class MerchandiseTab implements IHompageTab {
 
     @Override
     public void focus() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
         new WebDriverWait(driver, Global.Timeout)
                 .until(ExpectedConditions.visibilityOfElementLocated(merchTabPath));
+        WebElement merchTabElement = driver.findElement(merchTabPath);
+        js.executeScript("arguments[0].scrollIntoView(true);", merchTabElement);
+        js.executeScript("arguments[0].click();", merchTabElement);
+//        driver.findElement(merchTabPath).click();
+    }
 
-        driver.findElement(merchTabPath).click();
+    public void closeModal() {
+        WebElement modalCloseBtnElement = driver.findElement(modalCloseBtnPath);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", modalCloseBtnElement);
+        js.executeScript("arguments[0].click();", modalCloseBtnElement);
     }
 
     public void createItem(BazaarItem item) {
